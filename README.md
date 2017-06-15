@@ -21,3 +21,13 @@ The content comes from the book "Writing High Quality Code: Improving 157 Tips f
 #### 建议4：TryParse比Parse好
 * Parse会引发异常,引发及捕获异常时会对性能造成损耗
 
+#### 建议5：使用int?来确保值类型也可以为null
+* 取值转换赋值为int,不会因为是null而引发异常
+* 数据被篡改转型失败后应该保存为null值,而不是默认值
+
+#### 建议6：区别readonly和const的使用方法
+* const是一个编译期常量,readonly是一个运行时常量
+* const只能修饰基元类型、枚举类型或字符串类型,readonly没有限制
+* const天然是static的
+* readonly对于值类型变量,值本身不可改变
+* readonly对于引用类型变量,引用本身(相当于指针)不可改变
