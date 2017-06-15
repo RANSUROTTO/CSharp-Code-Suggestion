@@ -31,3 +31,78 @@ The content comes from the book "Writing High Quality Code: Improving 157 Tips f
 * const天然是static的
 * readonly对于值类型变量,值本身不可改变
 * readonly对于引用类型变量,引用本身(相当于指针)不可改变
+
+#### 建议7：将0值作为枚举的默认值
+* 编译器自动从0值开始计数
+* 枚举默认值为0,您如果没有为0值的枚举值,使用也不会引发异常 [ 出乎意外的选项应是不允许的 ]
+
+#### 建议8：避免给枚举类型的元素提供显式的值
+> 上一个建议已经讲到如果没有为元素显式赋值,编译器会逐个为元素的值+1
+```csharp
+//注意以下的代码
+enum Week
+{
+  Monday = 1,
+  Tuesday = 2,
+  ValueTemp,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6,
+  Sunday = 7
+}
+```
+> 执行时实际会发现 if(Week.ValueTemp == Week.Wednesday) 结果为true,当编译器发现元素ValueTemp时,它会自动在Tuesday=2的基础上+1,所以实际ValueTemp的值和Wednesday的值都是3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
