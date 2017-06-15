@@ -52,10 +52,20 @@ enum Week
   Sunday = 7
 }
 ```
-> 执行时实际会发现 if(Week.ValueTemp == Week.Wednesday) 结果为true,当编译器发现元素ValueTemp时,它会自动在Tuesday=2的基础上+1,所以实际ValueTemp的值和Wednesday的值都是3
+> 执行时实际会发现 if ( Week.ValueTemp == Week.Wednesday ) 结果为 true ,当编译器发现元素 ValueTemp 时,它会自动在 Tuesday = 2 的基础上 +1,所以实际 ValueTemp 的值和 Wednesday 的值都是 3
 
+#### 建议9：习惯重载运算符
+* 构建类时考虑是否可以通过使用 operator 关键字定义静态函数来重载运算符
 
+#### 建议10：创建对象时需要考虑是否实现比较器
+* 构建类时考虑是否可以通过实现 IComparable<T> 比较器接口
 
+#### 建议11：区别对待 == 和 Equals
+* 一般来说,对于引用类型,我们要定义"值类型相等",应该仅仅去重载 Equals( ) 方法,同时让 "==" 表示"引用性相等"
+
+#### 建议12：重写Equals时也要重写GetHashCode
+* 除非考虑到自定义类型会被用作于散列的集合的键值;否则,不建议重写 Equals( ) 方法,因为这会带来一系列问题
+* CLR首先会对 GetHashCode( ) 进行比较 [ 如未重写则会调用 object.GetHashCode( ) 方法,会对散列的集合处理产生影响 ]
 
 
 
