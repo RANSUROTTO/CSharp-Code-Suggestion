@@ -11,7 +11,7 @@ The content comes from the book "Writing High Quality Code: Improving 157 Tips f
 
 #### 建议2：使用默认的转型方法
 * 使用类型的转换运算符 [ 包括隐式转换和显示转换(贴标签) ]
-* 使用类型内置的转换方法 [ 包括Parse(),TryParse()或者ToString(),ToDouble(),ToDateTime()等方法 ]
+* 使用类型内置的转换方法 [ 包括Parse( ),TryParse( )或者ToString( ),ToDouble( ),ToDateTime( )等方法 ]
 * 使用帮助类提供的方法 [ 包括System.Convert类、System.BitConvert类 ]
 * 使用CLR支持的转型 [ 实际上就是基类和子类之间的相互转换 ]
 
