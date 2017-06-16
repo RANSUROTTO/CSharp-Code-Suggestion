@@ -1,6 +1,7 @@
 # CSharp-Code-Suggestion
 The content comes from the book "Writing High Quality Code: Improving 157 Tips for C # Programs".
 
+### 基本语言要素
 ---
 #### 建议1：正确的操作字符串
 * 确保尽量少的装箱
@@ -77,7 +78,17 @@ enum Week
 * 浅拷贝过程中,应将字符串看成是值类型 [ 理论上string类型是引用类型 ]
 * 建议实现接口ICloneable.Clone( )方法完成浅拷贝,由自己提供额外的方法完成深拷贝
 
+#### 建议15：使用dynamic来简化反射实现
+* 建议始终使用dynamic来简化反射实现 [ 除非你愿意牺牲大范围的代码整洁度去写复杂的反射优化 ]
 
+
+### 集合和LINQ
+---
+#### 建议16：元素数量可变的情况下不应使用数组
+* 数组不应指定过大长度,这会让数组成为一个大对象 [ 大对象在回收过程中会带来效率低的问题 ]
+* 在元素数量可变的情况下请考虑ArrayList或List<T>
+
+#### 建议17：多数情况下使用foreach进行循环遍历
 
 
 
