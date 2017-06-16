@@ -71,7 +71,7 @@ enum Week
 * 为类型重写 Object.ToString( ) 方法
 * 让类型继承接口 IFormattable ,可以根据需求的变化为类型提供多个格式化器
 
-
+#### 建议14：
 
 
 
