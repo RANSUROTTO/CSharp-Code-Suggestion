@@ -86,7 +86,7 @@ enum Week
 ---
 #### 建议16：元素数量可变的情况下不应使用数组
 * 数组不应指定过大长度,这会让数组成为一个大对象 [ 大对象在回收过程中会带来效率低的问题 ]
-* 在元素数量可变的情况下请考虑ArrayList或List<T>
+* 在元素数量可变的情况下请考虑ArrayList或List&lt;T&gt;
 
 #### 建议17：多数情况下使用foreach进行循环遍历
 * 使用foreach最大简化迭代代码
@@ -111,7 +111,48 @@ enum Week
 * 非泛型集合在进行循环访问,转型或拆箱和装箱操作中对效率影响极大
 
 #### 建议21：选择正确的集合
-* 如果集合的数目固定并且不涉及转型,使用数组效率高,否则就使用List<T>
+* 如果集合的数目固定并且不涉及转型,使用数组效率高,否则就使用 List&lt;T&gt; 
+> 集合的分类
+![list type](https://github.com/ZhengZicong/CSharp-Code-Suggestion/blob/master/image_1.png)<br/>
+> FCL集合类图
+![fcl list](https://github.com/ZhengZicong/CSharp-Code-Suggestion/blob/master/image_2.png)
+
+#### 建议22：确保集合的线程安全
+* 可以通过 Lock( ) 来实现集合在多个线程被操作时保持同步
+* 可以使用System.Collections.Concurrent命名空间下实现线程的集合类
+* ConcurrentBag<T> 对应 List&lt;T&gt;
+* ConcurrentDictionary<TKey,TValue> 对应 Dictionary<TKey,TValue>
+* ConcurrentQueue<T> 对应 Queue<T>
+* ConcurrentStack<T> 对应 Statck<T>
+
+#### 建议23：避免将List&lt;T&gt;作为自定义集合类的基类
+* 如果要实现一个自定义的集合类,不应该以一个FCL集合类为基类
+* 实现一个自定义集合类,应扩展相应的泛型接口.FCL集合类应该以组合的形式包含至自定义的集合类
+
+#### 建议24：迭代器应该是只读的
+* 不要为迭代器设置可写属性
+
+#### 建议25：谨慎集合属性的可写操作
+* 如果类型的属性中有集合属性,将其设置为可写,则会增加抛出异常的几率
+
+#### 建议26：使用匿名类型存储LINQ查询结果
+* 使用匿名类代替复杂多变的业务临时类型使代码变的简洁及易于维护
+匿名类的基本特性
+1. 既支持简单类型也支持复杂类型,简单类型必须是一个非空初始值,复杂类型则是一个以new开头的初始化项
+2. 匿名类型的属性是只读的,没有属性设置器,它一旦被初始化就不可更改
+3. 如果两个匿名类的属性值相同,那么就认为这两个匿名类型相等
+4. 匿名类型可以在循环中用作初始化器
+5. 匿名类型支持智能感知
+6. 匿名类型也可以拥有方法
+
+#### 建议27：在查询中使用Lambda表达式
+* LINQ实际上是基于扩展方法和Lambda表达式的,任何LINQ查询都能够通过调用扩展方法和LINQ表达式来代替
+
+#### 建议28：理解延迟求值和主动求值之间的区别
+
+
+
+
 
 
 
