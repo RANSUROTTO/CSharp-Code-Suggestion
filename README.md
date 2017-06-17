@@ -89,7 +89,23 @@ enum Week
 * 在元素数量可变的情况下请考虑ArrayList或List<T>
 
 #### 建议17：多数情况下使用foreach进行循环遍历
+* 使用foreach最大简化迭代代码
+* foreach会自动将代码置入try-finally块
+* 若类型实现了IDispose接口,他会在循环结束后自动调用Dispose方法
 
+#### 建议18：foreach不能代替for
+* foreach循环会调用MoveNext方法来遍历元素,在MoveNext方法内部会进行版本检测,当检测到版本号有变动,就会抛出InvalidOperationException异常.所以它不支持循环时对集合进行增删改查
+
+#### 建议19：使用更有效的对象和集合初始化
+* FCL3.5之后提供新语法:对象和集合初始化设定项
+```csharp
+  List<Person> personList = new List<Person>(){
+    new Person() { Name='Rose', Age = 19 },
+    mike,
+    null
+  }
+```
+> 初始化设定项绝不仅是为了对象和集合初始化的方便,它更重要的作用是为了LINQ查询中的匿名类型进行属性初始化
 
 
 
