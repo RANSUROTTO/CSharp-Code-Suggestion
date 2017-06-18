@@ -182,12 +182,31 @@ enum Week
 * 使用Lambda或匿名方法可以更好的简化及美化代码 [ 前提是不重用 ]
 
 #### 建议38：小心闭包中的陷阱
+```csharp
+  //设想以下代码会输出什么
+  static void Main(string[] args)
+  {
+    //我们的意图是让匿名方法(在这里表现为Lambda表达式)接受参数i,并输出
+    List<Action> lists = new List<Action>();
+    for(int i = 0 ; i < 5 ; i++ )
+    {
+      Action t = () => { Console.WriteLine(i.ToString()); };
+      lists.Add(t);
+    }
+    foreach(Action t in lists)
+    {
+      t();
+    }
+  }
+  //你预想的结果可能是: 0 1 2 3 4 
+  //而实际输出的是: 5 5 5 5 5
+```
 > 如果匿名方法引用了某个局部变量,编译器就会自动将该引用提升到该闭包对象中,将会偏离编码时预期的结果
 
 #### 建议39：了解委托的实质
 > 理解c#中的委托需要把握两个要点:
-1.委托类似于方法(类型安全)的指针
-2.委托是一个类(或这个类的集合),当对其(一)进行实例化的时候,要将引用方法作为它的构造方法的参数
+1. 委托类似于方法(类型安全)的指针
+2. 委托是一个类(或这个类的集合),当对其(一)进行实例化的时候,要将引用方法作为它的构造方法的参数
 
 #### 建议40：使用event关键字为委托施加保护
 * event为委托加了保护,保证委托什么时候通知,是委托自己的职责,而不是由调用者决定
@@ -199,10 +218,41 @@ enum Week
 3. 委托具有两个参数:sender表示事件触发者,e表示事件参数
 4. 事件参数的名称以EventArgs结束
 
-#### 建议42：
-
-
-
+#### 建议42：使用泛型参数兼容泛型接口的不变性
+* 让返回值类型返回比声明的类型派生程度更大的类型,叫做"协变"
+```csharp
+  //例 以下称为协变
+  public Employee GetAEmployee(string name)
+  {
+    Console.WriteLine("我是雇员:{0}",name);
+    return new Programemer(){ Name = name }; // Programemer是Employee的子类
+  }
+```
+* 但以下代码将会不成立 [ 编译错误 ]
+```csharp
+  interface ISalary<T> { void Pay( ); }
+  
+  class BaseSalary<T> : ISalary<T> { void Pay( ){ Console.WriteLine("pay base salary"); } }
+  
+  static void Main(string[] args)
+  {
+    ISalary<Programemer> s = new  ISalary<Programemer>();
+    PrintSalary(s);
+  }
+  
+  static void PrintSalary(ISalary<Employee> s)
+  {
+    s.Pay();
+  }
+```
+> 可以注意到,本建议开头指出的"协变"是针对返回值而言的,但是所举的这个例子却没有体现出"返回值"这个概念
+```csharp
+  static void PrintSalary<T>(ISalary<T> s)
+  {
+    s.pay();
+  }
+```
+> 上面这个改动可以正常运行.说明实际上,只要泛型类型参数在一个接口声明中不被用来作为方法的输入参数,我们都可姑且把它看成"返回值"类型的。上面这个改动,是满足"协变"的定义的.
 
 
 
