@@ -1,5 +1,4 @@
 # CSharp-Code-Suggestion
-The content comes from the book "Writing High Quality Code: Improving 157 Tips for C # Programs".
 
 ### 基本语言要素
 ---
@@ -161,6 +160,14 @@ enum Week
 #### 建议31：在LINQ查询中避免不必要的迭代
 * 实际编码中,要充分运用 First( ) 和 Take( ) 等方法,为应用带来高效性,而不会让时间浪费在一些无效的迭代中
 
+
+### 泛型、委托和事件
+---
+#### 建议32：总是优先考虑泛型
+* 无论是泛型类还是泛型方法都同时具备可重用性、类型安全和高效率等特性
+
+#### 建议33：避免在泛型类型中声明静态成员
+* 随着你为T指定不同的数据类型,泛型类也会变成不同的数据类型,在它们之间是不共享静态成员的
 
 
 
