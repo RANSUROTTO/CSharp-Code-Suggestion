@@ -120,10 +120,10 @@ enum Week
 #### 建议22：确保集合的线程安全
 * 可以通过 Lock( ) 来实现集合在多个线程被操作时保持同步
 * 可以使用System.Collections.Concurrent命名空间下实现线程的集合类
-* ConcurrentBag<T> 对应 List&lt;T&gt;
+* ConcurrentBag&lt;T&gt; 对应 List&lt;T&gt;
 * ConcurrentDictionary<TKey,TValue> 对应 Dictionary<TKey,TValue>
-* ConcurrentQueue<T> 对应 Queue<T>
-* ConcurrentStack<T> 对应 Statck<T>
+* ConcurrentQueue&lt;T&gt; 对应 Queue&lt;T&gt;
+* ConcurrentStack&lt;T&gt; 对应 Statck&lt;T&gt;
 
 #### 建议23：避免将List&lt;T&gt;作为自定义集合类的基类
 * 如果要实现一个自定义的集合类,不应该以一个FCL集合类为基类
@@ -149,6 +149,18 @@ enum Week
 * LINQ实际上是基于扩展方法和Lambda表达式的,任何LINQ查询都能够通过调用扩展方法和LINQ表达式来代替
 
 #### 建议28：理解延迟求值和主动求值之间的区别
+* 使用LINQ求值时,延迟求值能够带来显著的效果提升
+* 应细知延迟求值和主动求值的区别,体会两者在应用中带来的结果,避免意想不到的Bug
+
+#### 建议29：区别LINQ查询中的IEnumberable&lt;T&gt;和IQueryable&lt;T&gt;
+* 使用本地数据源时采用IEnumberable&lt;T&gt;,远程数据源用IQueryable&lt;T&gt; [ Enumberable中查询参数接受的是Func<>,使用Queryable时接受的参数是Experssion<> ]
+
+#### 建议30：使用LINQ取代集合中的比较器和迭代器
+* 实现比较器和迭代器做操作可扩展性太低,对代码侵入性过高.强烈建议你使用LINQ所带来的便捷性
+
+#### 建议31：在LINQ查询中避免不必要的迭代
+* 实际编码中,要充分运用 First( ) 和 Take( ) 等方法,为应用带来高效性,而不会让时间浪费在一些无效的迭代中
+
 
 
 
