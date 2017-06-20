@@ -269,12 +269,47 @@ enum Week
 * 委托中的泛型变量天然是部分支持协变的
 
 #### 建议45：为泛型类型参数指定逆变
-> 逆变是指方法的参数可以是委托或泛型接口的参数类型的基类
+* 逆变是指方法的参数可以是委托或泛型接口的参数类型的基类
+1. FCL4.0中支持逆变的常用委托有 Func<in T,out TResult>、Predicate<in T>
+2. 常用的泛型接口有 IComparer<in T>
 
 
+### 资源管理和序列化
+---
+#### 建议46：显式释放资源需要继承接口 IDisposable
+1. 托管资源：由CLR管理分配和释放的资源,即从CLR里new出来的对象
+2. 非托管资源：不受CLR管理的对象,如Windows内核对象,或者文件、数据连接、套接字、COM对象等
+* 如果类型需要显示释放资源,那么一定要继承IDispose接口
 
+#### 建议47：及时提供了显示释放方法,也应该在终结器中提供隐式清理
+```csharp
+//在标准的Dispose模式中,我们注意到一个以 ~ 开头的方法,如下所示:
+  ///<summary>
+  /// 必须,防止程序员忘记显示调用Dispose方法
+  ///</summary>
+  ~SampleClass()
+  {
+    Dispose(false);
+  }
+```
+> 这个方法叫做类型的终结器:意义在于:我们不能奢望类型的调用者肯定会调用 Dispose( ) 方法,基于终结器会被垃圾回收器调用这个特点,它被用作资源释放的补救措施
 
+#### 建议48：Dispose方法应允许被多次调用
+* 在Dispose模式中,应该始终为类型创建一个变量,用来表示对象是否已经Dispose过,保证一个类型的Dispose方法允许被多次调用而不抛异常
+* 当对象调用过 Dispose( ) 方法后,此时进行调用对象的公开的方法时,应该为调用者抛出一个ObjectDisposedException异常
 
+#### 建议49：在Dispose模式中应提取一个受保护的虚方法
+* 在标准的Dispose模式中,真正实现IDispose接口的Dispose方法并没有做实际的清理工作,而是交给一个带布尔参数且受保护的虚方法
+```csharp
+  public void Dispose( ){
+    Dispose(true);
+    GC.SuppressFinalize(this);
+  }
+  protected virtual void Dispose(bool disposing){
+    //实际清理操作
+  }
+```
+* 之所以提供一个虚方法,是因为考虑到该类型会被其他类型继承的情况.如果类型存在一个子类,子类也许会实现自己的Dispose模式.受保护的虚方法用来提醒子类,必须在实现自己的清理方法时注意到父类的清理工作,即子类需要在自己的释放方法里调用base.Dispose( )方法
 
 
 
