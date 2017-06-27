@@ -349,7 +349,13 @@ enum Week
 3. 字段因为业务上的原因不允许被序列化   -例如明文密码不应该被序列化后一同保存在文件中
 4. 如果字段本身所对应的类型未被设定为可序列化,那它j就该被标注为不可序列化,否则会抛出SerializationException
 
-
+#### 建议55：利用定制特性减少可序列化的字段
+* 在System.Runtime.Serialization命名空间下,有4个这样的特性,下面是MSDN上对它们的解释：
+1. OnDeserializedAttribute,当它应用于某方法时,会指定在对象反序列化后立即调用此方法
+2. OnDeserializingAttribute,当它应用于某方法时,会指定在反序列化对象时调用此方法
+3. OnSerializedAttribute,如果将它应用于某方法,则应指定在序列化该对象后是否调用该方法
+4. OnSerializingAttribute,如果将它应用于某方法,则应指定在序列化该对象前是否调用该方法
+> 利用这些特性,可以灵活地处理序列化和反序列化的过程
 
 
 
