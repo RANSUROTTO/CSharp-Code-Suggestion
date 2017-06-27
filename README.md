@@ -355,8 +355,10 @@ enum Week
 2. OnDeserializingAttribute,当它应用于某方法时,会指定在反序列化对象时调用此方法
 3. OnSerializedAttribute,如果将它应用于某方法,则应指定在序列化该对象后是否调用该方法
 4. OnSerializingAttribute,如果将它应用于某方法,则应指定在序列化该对象前是否调用该方法
+5. NonSerialized,如果将它应用于某个属性,则在序列化时忽略这个字段
 > 利用这些特性,可以灵活地处理序列化和反序列化的过程
 
+#### 建议56：使用继承ISerializable接口更灵活地控制序列化过程
 
 
 
