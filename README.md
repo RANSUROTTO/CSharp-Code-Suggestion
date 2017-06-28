@@ -389,7 +389,7 @@ public class Employee : ISerializable
 > 继承ISerializable可以完成特性做不到的功能,例如将Employee对象序列化,然后在反序列化中将其变成另外一个对象
 
 #### 建议57：实现ISerializable的子类型应负责父类的序列化
-
+* 子类应调用父类序列方法或自己实现父类的序列化实现
 
 
 
