@@ -361,7 +361,34 @@ enum Week
 #### 建议56：使用继承ISerializable接口更灵活地控制序列化过程
 * 当建议55的特性不能完全满足自定义序列化的要求时,那就需要继承ISerializable
 * 继承ISerializable接口,它将会忽略掉类型所有的序列化特性,转而调用GetObjectData方法来处理序列化,在一个带参的构造方法中处理反序列化
+```csharp
+// 例
+[Serializable]
+public class Employee : ISerializable
+{
+  public string Name{get;set;}
+  public int Age{get;set;}
+  public string Description{get;set;}
+  
+  public Employee(){}
+  //反序列化
+  public Employee(SerializationInfo info ,StreamingContext context)
+  {
+    Name = info.GetString("Name");
+    Age = info.GetInt32("Age");
+    Description = string.Format("{0}{1}",Name,Age);
+  }
+  //序列化
+  void ISerializable.GetObjectData(SerializationInfo info,StreamingContext context)
+  {
+    info.AddValue("Name",Name);
+    info.AddValue("Age",Age);
+  }
+}
+```
+> 继承ISerializable可以完成特性做不到的功能,例如将Employee对象序列化,然后在反序列化中将其变成另外一个对象
 
+#### 建议57：实现ISerializable的子类型应负责父类的序列化
 
 
 
