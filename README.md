@@ -510,7 +510,10 @@ public class Employee : ISerializable
 * 微软曾建议过.使用System.Application让用户抛出应用异常,使用System.SystemApplication来抛出CLR异常.遗憾的是,微软后来自己也没有遵循规则,导致它的这条建议仅仅作为建议存在过,而没有实际意义
 * 现在,微软已修正这一点,当前的建议是:从System.Exception或其它常见基本异常之一派生异常
 
+#### 建议69：应使用Finally避免资源泄露
+* 应在finally块中进行垃圾回收或资源释放等处理防止资源泄露
 
+#### 建议70：避免在调用栈较低的位置记录异常
 
 
 
