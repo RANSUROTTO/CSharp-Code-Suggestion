@@ -554,7 +554,7 @@ public class Employee : ISerializable
 * 一般不建议更改线程优先级,当一些关键的线程,还是可以提升线程的优先级的,这些关键线程应具有运行时间短、能即刻进入等待状态等特征
 
 #### 建议77：正确停止线程
-
+* FCL为我们提供了标准的取消模式:协作式取消(Cooperative Cancellation)
 
 
 
