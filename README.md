@@ -598,8 +598,9 @@ public class Employee : ISerializable
 2. ThreadPool不支持线程执行的先后次序
 * Task提供更多的API进一步优化了后台线程池的调度,加快了线程的处理速度.所以在FCL4.0时代,如果要使用多线程,我们理应更多地使用Task
 
-
-
+#### 建议81：使用Parallel简化Task的使用
+* 命名空间System.Threading.Tasks中,有一个静态类Parallel简化了在同步状态下的Task的操作.Parallel主要提供3个有用方法:For、ForEach、Invoke
+* 如果需要Task同步运行,则不应使用Parallel的方式
 
 
 
