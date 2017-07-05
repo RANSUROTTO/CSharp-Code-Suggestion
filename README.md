@@ -608,7 +608,8 @@ public class Employee : ISerializable
 
 #### 建议83：小心Parallel中的陷阱
 
-
+#### 建议84：使用PLINQ
+* 微软为LINQ扩展了一个类ParallelEnumerable(System.Linq中),它所提供的扩展方法会让LINQ支持并行计算,这就是PLINQ
 
 
 
