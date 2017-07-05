@@ -602,8 +602,11 @@ public class Employee : ISerializable
 * 命名空间System.Threading.Tasks中,有一个静态类Parallel简化了在同步状态下的Task的操作.Parallel主要提供3个有用方法:For、ForEach、Invoke
 * 如果需要Task同步运行,则不应使用Parallel的方式
 
+#### 建议82：Parallel简化但不等同于Task默认行为
+* 运行parallel的For,Foreach时,调用者线程(可能是主线程)是被阻滞的.Parallel虽然将任务交给Task处理,即交给CLR线程处理,不过调用者会一直等到线程池中的工作全部完成
+* 并行编程,意味着运行时在后台将任务分配到尽量更多的CPU上,虽然它在后台使用Task管理,但并不意味着它等同于异步
 
-
+#### 建议83：小心Parallel中的陷阱
 
 
 
