@@ -610,8 +610,7 @@ public class Employee : ISerializable
 
 #### 建议84：使用PLINQ
 * 微软为LINQ扩展了一个类ParallelEnumerable(System.Linq中),它所提供的扩展方法会让LINQ支持并行计算,这就是PLINQ
-
-
+* 建议对集合中的元素项进行操作的时候使用PLINQ代替LINQ.但要明确不是所有并行查询的速度都比顺序查询快
 
 
 
