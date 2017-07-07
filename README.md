@@ -612,6 +612,8 @@ public class Employee : ISerializable
 * 微软为LINQ扩展了一个类ParallelEnumerable(System.Linq中),它所提供的扩展方法会让LINQ支持并行计算,这就是PLINQ
 * 建议对集合中的元素项进行操作的时候使用PLINQ代替LINQ.但要明确不是所有并行查询的速度都比顺序查询快
 
+#### 建议85：Task中的异常处理
+* 多线程与并行编程中尤其是这样.如果不处理这些后台任务中的异常,应用程序将会莫名其妙的退出.处理那些不是主线程产生的异常,最终办法都是将其包装到主线程上
 
 
 
