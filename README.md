@@ -614,7 +614,10 @@ public class Employee : ISerializable
 
 #### 建议85：Task中的异常处理
 * 多线程与并行编程中尤其是这样.如果不处理这些后台任务中的异常,应用程序将会莫名其妙的退出.处理那些不是主线程产生的异常,最终办法都是将其包装到主线程上
+* 可以将AggrgateException异常看做为任务并行库编程的最上层异常.任务中捕获的异常,最终都应该包装到AggregateException中
+* 建议采用事件通知的模型处理Task中的异常
 
+#### 建议86：Parallel中的异常处理
 
 
 
