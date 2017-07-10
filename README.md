@@ -620,8 +620,9 @@ public class Employee : ISerializable
 #### 建议86：Parallel中的异常处理
 * Parallel中建议使用线程安全的泛型集合来存储任务中引发的异常,再将异常集合包装至AggregateException中让主线程进行处理
 
-
-
+#### 建议87：区分WPF和WinForm的线程模型
+* WPF和WinForm窗体应用程序都有一个要求,那就是UI元素必须由它的那个线程进行更新(不做配置的默认情况下)
+* 
 
 
 
