@@ -618,7 +618,7 @@ public class Employee : ISerializable
 * 建议采用事件通知的模型处理Task中的异常
 
 #### 建议86：Parallel中的异常处理
-
+* Parallel中建议使用线程安全的泛型集合来存储任务中引发的异常,再将异常集合包装至AggregateException中让主线程进行处理
 
 
 
