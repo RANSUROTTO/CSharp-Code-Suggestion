@@ -685,7 +685,7 @@ public class Employee : ISerializable
 ```
 > 运行上面的示例,看上去会输出test的代码将会输出null.
 
-#### 
+#### 建议96：成员应优先考虑公开基类型或接口
 
 
 
