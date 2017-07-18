@@ -658,10 +658,34 @@ public class Employee : ISerializable
 1. 如果子类中的方法前面带有new关键字,则该方法被定义为独立基于类的方法
 2. 如果子类中的方法前面带有override关键字,则子类的对象将调用该方法,而不是调用基类方法
 
+#### 建议95：避免在构造方法中调用虚成员
+* 在构造方法中调用虚成员会带来一些意想不到的错误,虽然这种用法不常见,仍需要注意这类陷阱.
+```csharp
+  class Person{
+    public Person(){
+      InitSkin();
+    }
+    protected virtual void InitSkin(){
+      //省略....
+    }
+  }
+  class American : Person{
+    string name;
+    public American():base(){
+      name = "test";
+    }
+    protected override void IniteSkin(){
+      Console.Write(name);
+    }
+  }
+  public static void Main(string[] args){
+    Person person = new American();
+    Console.ReadKey();
+  }
+```
+> 运行上面的示例,看上去会输出test的代码将会输出null.
 
-
-
-
+#### 
 
 
 
