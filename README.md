@@ -689,6 +689,16 @@ public class Employee : ISerializable
 * 类型成员如果优先考虑公开基类型或接口,那么会让类型支持更多的应用场合
 > 例:给IEnumberable方法扩展方法Empty( ),其集合子类都可以不用实现自己的Empty( )方法了.如果不扩展基类型或接口的话,则要求我们为每一个集合类型都实现一个Empty( )方法,这是很恐怖的
 
+#### 建议97：优先考虑将基类型或接口作为参数传递
+* 除了公开基类型或接口外,基于同样的道理,方法的参数也应该考虑基类型或接口
+* 以下Enumberable类型为例,下例存在的扩展方法,可以对所有集合进行Take操作
+```csharp
+  public static IEnumerable<TSource> Take<TSource> (this IEnumerale<TSource> source,int count)
+  {
+    if(source == null) throw Error.ArgumentNull("source");
+    return TakeInterator<TSource>(source,count);
+  }
+```
 
 
 
